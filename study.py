@@ -19,6 +19,8 @@ elif mode == "2":
 elif mode == "3":
     wb.open(
         "file:///D:/Documents/education/A%20Level/Computer%20Science/CIE%20Computer%20Science%20[new].pdf")
+    os.system("explorer 'D:\Documents\education\A Level\Computer Science'")
+    wb.open("https://docs.google.com/document/d/14_CpAH_uRBnjl-vzST8yinuyScrn30VUGtKSXYMxd4I/edit")
 
 else:
     input("Exitting Study Mode\n\nPress [Enter] to exit.")
