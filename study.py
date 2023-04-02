@@ -24,8 +24,13 @@ def parse_commands(content: str):
             _run(' '.join(line.split()[1:]))
 
 
-cwd = os.getcwd()
-for name in os.listdir(os.getcwd()):
-    if name.endswith(".study"):
-        with open(os.path.join(os.getcwd(), name), 'r', encoding='utf-8') as file:
-            parse_commands(content=file.read())
+def run():
+    cwd = os.getcwd()
+    for name in os.listdir(os.getcwd()):
+        if name.endswith(".study"):
+            with open(os.path.join(os.getcwd(), name), 'r', encoding='utf-8') as file:
+                parse_commands(content=file.read())
+
+
+if __name__ == "__main__":
+    run()
