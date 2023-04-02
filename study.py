@@ -1,26 +1,31 @@
 import os
-import webbrowser as wb
+import webbrowser
 
-mode = input(
-    "Select Subject:\n\t[1] Pure 1\n\t[2] Information Technology\n\t[3] Computer Science\n\n> ")
 
-if mode == "1":
-    wb.open("file:///D:/Documents/education/A%20Level/Maths/Pure%201/Resources/Pure%20Maths%201%20Worked%20Solution.pdf")
-    wb.open_new_tab(
-        "file:///D:/Documents/education/A%20Level/Maths/Pure%201/Resources/Pure%20Maths%20Coursebook.pdf")
-    wb.open_new_tab(
-        "file:///D:/Documents/education/A%20Level/Maths/Pure%201/Resources/Pure%20Maths%20Coursebook.pdf")
+def _browser(value: str):
+    webbrowser.open(value)
 
-elif mode == "2":
-    wb.open("file:///D:/Documents/education/A%20Level/Information%20Technology/Information%20Technology.pdf")
-    wb.open_new_tab(
-        "https://docs.google.com/document/d/1roP3jHgoRlDFK6GnRzNLtVaCjFZbN0edxrA5rCiJhR8/edit")
 
-elif mode == "3":
-    wb.open(
-        "file:///D:/Documents/education/A%20Level/Computer%20Science/CIE%20Computer%20Science%20[new].pdf")
-    os.system("explorer 'D:\Documents\education\A Level\Computer Science'")
-    wb.open("https://docs.google.com/document/d/14_CpAH_uRBnjl-vzST8yinuyScrn30VUGtKSXYMxd4I/edit")
+def _notepad(value: list):
+    os.system(f"notepad {value}")
 
-else:
-    input("Exitting Study Mode\n\nPress [Enter] to exit.")
+
+def _run(value: str):
+    os.system(value)
+
+
+def parse_commands(content: str):
+    for line in content.splitlines():
+        if line.startswith("browser"):
+            _browser(' '.join(line.split()[1:]))
+        elif line.startswith("notepad"):
+            _notepad(' '.join(line.split()[1:]))
+        elif line.startswith("run"):
+            _run(' '.join(line.split()[1:]))
+
+
+cwd = os.getcwd()
+for name in os.listdir(os.getcwd()):
+    if name.endswith(".study"):
+        with open(os.path.join(os.getcwd(), name), 'r', encoding='utf-8') as file:
+            parse_commands(content=file.read())
